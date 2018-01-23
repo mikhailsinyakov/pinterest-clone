@@ -1,0 +1,30 @@
+{
+  "name": "nightlife_coordination",
+  "version": "1.0.1",
+  "description": "App for searching bars in your area",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikhailsinyakov/nightlife_coordination"
+  },
+  "homepage": "https://nightlife-coordination-mikhailsinyakov.c9users.io",
+  "keywords": [
+    "nightlife",
+    "bars",
+    "search"
+  ],
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Mikhail Sinyakov",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^1.2.0",
+    "express": "^4.12.4",
+    "express-session": "^1.11.3",
+    "mongoose": "^4.1.0",
+    "nodemon": "^1.14.11",
+    "passport": "^0.3.0",
+    "passport-github": "^1.0.0"
+  }
+}
