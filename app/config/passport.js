@@ -1,6 +1,6 @@
 'use strict';
 
-const GitHubStrategy = require('passport-github').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 const User = require('../models/users');
 const configAuth = require('./auth');
 
@@ -15,14 +15,14 @@ module.exports = passport => {
 		});
 	});
 
-	passport.use(new GitHubStrategy({
-		clientID: configAuth.githubAuth.clientID,
-		clientSecret: configAuth.githubAuth.clientSecret,
-		callbackURL: configAuth.githubAuth.callbackURL
+	passport.use(new TwitterStrategy({
+		clientID: configAuth.twitterAuth.clientID,
+		clientSecret: configAuth.twitterAuth.clientSecret,
+		callbackURL: configAuth.twitterAuth.callbackURL
 	},
 	(token, refreshToken, profile, done) => {
 		process.nextTick(() => {
-			User.findOne({ 'github.id': profile.id }, (err, user) => {
+			User.findOne({ 'twitter.id': profile.id }, (err, user) => {
 				if (err) {
 					return done(err);
 				}
@@ -30,17 +30,14 @@ module.exports = passport => {
 				if (user) {
 					return done(null, user);
 				} else {
-					var newUser = new User();
+					const newUser = new User();
 
-					newUser.github.id = profile.id;
-					newUser.github.username = profile.username;
-					newUser.github.displayName = profile.displayName;
-					newUser.github.publicRepos = profile._json.public_repos;
+					newUser.twitter.id = profile.id;
+					newUser.twitter.username = profile.username;
+					newUser.twitter.displayName = profile.displayName;
 
 					newUser.save(err => {
-						if (err) {
-							throw err;
-						}
+						if (err) throw err;
 
 						return done(null, newUser);
 					});

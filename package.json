@@ -1,17 +1,16 @@
 {
-  "name": "nightlife_coordination",
+  "name": "pinterest_clone",
   "version": "1.0.1",
-  "description": "App for searching bars in your area",
+  "description": "App for keeping images",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mikhailsinyakov/nightlife_coordination"
+    "url": "git+https://github.com/mikhailsinyakov/pinterest-clone.git"
   },
-  "homepage": "https://nightlife-coordination-mikhailsinyakov.c9users.io",
+  "homepage": "https://github.com/mikhailsinyakov/pinterest-clone#readme",
   "keywords": [
-    "nightlife",
-    "bars",
-    "search"
+    "pinterest",
+    "images"
   ],
   "scripts": {
     "start": "node server.js"
@@ -25,6 +24,10 @@
     "mongoose": "^4.1.0",
     "nodemon": "^1.14.11",
     "passport": "^0.3.0",
-    "passport-github": "^1.0.0"
-  }
+    "passport-twitter": "^1.0.4"
+  },
+  "bugs": {
+    "url": "https://github.com/mikhailsinyakov/pinterest-clone/issues"
+  },
+  "devDependencies": {}
 }

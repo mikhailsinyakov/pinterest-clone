@@ -4,11 +4,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const User = new Schema({
-	github: {
+	twitter: {
 		id: String,
 		displayName: String,
-		username: String,
-        publicRepos: Number
+		username: String
 	}
 });
 

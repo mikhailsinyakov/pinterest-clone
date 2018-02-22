@@ -14,7 +14,7 @@ const ajaxFunctions = {
       document.addEventListener('DOMContentLoaded', fn, false);
    },
    ajaxRequest: function ajaxRequest (method, url, callback) {
-      var xmlhttp = new XMLHttpRequest();
+      const xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = () => {
          if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {

@@ -1,12 +1,16 @@
-# Nightlife coordination app
+# Pinterest clone app
 
-You can view all bars in your area
+As an unauthenticated user, you can login with Twitter.
 
-As an authenticated user you can: 
-    - add yourself to a bar to indicate you are going there tonight
-    - remove yourself from a bar if you no longer want to go there
-    
-When you login you should not have to search again
+As an authenticated user, you can link to images.
+
+As an authenticated user, you can delete images that you've linked to.
+
+As an authenticated user, you can see a Pinterest-style wall of all the images you've linked to.
+
+As an unauthenticated user, you can browse other users' walls of images.
+
+As an authenticated user, if you upload an image that is broken, it will be replaced by a placeholder image.
 
 
 Created by using [Clementine.js](https://github.com/johnstonbl01/clementinejs-fcc.git) boilerplate 
