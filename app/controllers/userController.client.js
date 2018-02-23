@@ -20,13 +20,5 @@
          updateHtmlElement(userObject, displayName, 'username');
       }
 
-      if (profileId !== null) {
-         updateHtmlElement(userObject, profileId, 'id');   
-      }
-
-      if (profileUsername !== null) {
-         updateHtmlElement(userObject, profileUsername, 'username');   
-      }
-
    }));
 })();

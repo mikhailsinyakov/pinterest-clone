@@ -20,11 +20,6 @@ module.exports = (app, passport) => {
 			res.redirect('/');
 		});
 
-	app.route('/profile')
-		.get(isLoggedIn, (req, res) => {
-			res.sendFile(path + '/public/profile.html');
-		});
-
 	app.route('/api/:id')
 		.get(isLoggedIn, (req, res) => {
 			res.json(req.user.twitter);

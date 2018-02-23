@@ -7,10 +7,7 @@ const User = new Schema({
 	twitter: {
 		id: String,
 		username: String,
-		displayName: String,
-		location: String,
-		followers_count: Number,
-		following_count: Number
+		displayName: String
 	}
 });
 
