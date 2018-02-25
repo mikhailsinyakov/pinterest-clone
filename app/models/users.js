@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const User = new Schema({
-	twitter: {
+	vkontakte: {
 		id: String,
 		username: String,
 		displayName: String

@@ -1,6 +1,9 @@
 'use strict';
 
+const PicsHandler = require('../controllers/picsHandler.server');
 const path = process.cwd();
+const picsHandler = new PicsHandler();
+
 module.exports = (app, passport) => {
 
 	function isLoggedIn (req, res, next) {
@@ -20,16 +23,30 @@ module.exports = (app, passport) => {
 			res.redirect('/');
 		});
 
-	app.route('/api/:id')
-		.get(isLoggedIn, (req, res) => {
-			res.json(req.user.twitter);
+	app.route('/api/users/getUserData')
+		.get((req, res) => {
+			res.json(req.user ? req.user.vkontakte : {});
 		});
+	
+	app.route('/api/pics/getAllPics')
+		.get(picsHandler.getAllPics);
+		
+	app.route('/api/pics/addPicture')
+		.post(isLoggedIn, picsHandler.addPicture);
+		
+	app.route('/api/pics/likeUnlikePicture')
+		.put(isLoggedIn, picsHandler.likeOrUnlikePicture);
+		
+	app.route('/api/pics/deletePicture')
+		.delete(isLoggedIn, picsHandler.deletePicture);
+		
+	
 
-	app.route('/auth/twitter')
-		.get(passport.authenticate('twitter'));
+	app.route('/auth/vkontakte')
+		.get(passport.authenticate('vkontakte'));
 
-	app.route('/auth/twitter/callback')
-		.get(passport.authenticate('twitter', {
+	app.route('/auth/vkontakte/callback')
+		.get(passport.authenticate('vkontakte', {
 			successRedirect: '/',
 			failureRedirect: '/'
 		}));

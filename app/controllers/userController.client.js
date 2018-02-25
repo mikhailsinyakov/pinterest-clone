@@ -2,23 +2,22 @@
 
 (function () {
 
-   const profileId = document.querySelector('#profile-id') || null;
-   const profileUsername = document.querySelector('#profile-username') || null;
    const displayName = document.querySelector('#display-name');
-   const apiUrl = appUrl + '/api/:id';
+   const apiUrl = appUrl + '/api/users/getUserData';
 
-   function updateHtmlElement (data, element, userProperty) {
-      element.innerHTML = data[userProperty];
-   }
 
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, data => {
+      
       const userObject = JSON.parse(data);
 
-      if (userObject.displayName !== null) {
-         updateHtmlElement(userObject, displayName, 'displayName');
+      if (userObject.displayName) {
+         displayName.innerHTML = userObject.displayName;
+      } else if (userObject.username) {
+         displayName.innerHTML = userObject.username;
       } else {
-         updateHtmlElement(userObject, displayName, 'username');
+         displayName.innerHTML = "guest";
       }
+      
 
    }));
 })();

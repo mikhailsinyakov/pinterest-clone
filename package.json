@@ -19,6 +19,7 @@
   "author": "Mikhail Sinyakov",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "dotenv": "^1.2.0",
     "express": "^4.16.2",
@@ -26,7 +27,7 @@
     "mongoose": "^4.13.11",
     "nodemon": "^1.15.1",
     "passport": "^0.3.2",
-    "passport-twitter": "^1.0.4",
+    "passport-vkontakte": "^0.3.2",
     "superagent": "^3.8.2"
   },
   "bugs": {

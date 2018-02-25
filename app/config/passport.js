@@ -1,6 +1,6 @@
 'use strict';
 
-const TwitterStrategy = require('passport-twitter').Strategy;
+const VkontakteStrategy = require('passport-vkontakte').Strategy;
 const User = require('../models/users');
 const configAuth = require('./auth');
 
@@ -15,23 +15,23 @@ module.exports = passport => {
 		});
 	});
 
-	passport.use(new TwitterStrategy({
-		consumerKey: configAuth.twitterAuth.consumerKey,
-		consumerSecret: configAuth.twitterAuth.consumerSecret,
-		callbackURL: configAuth.twitterAuth.callbackURL
+	passport.use(new VkontakteStrategy({
+		clientID: configAuth.vkontakteAuth.clientID,
+		clientSecret: configAuth.vkontakteAuth.clientSecret,
+		callbackURL: configAuth.vkontakteAuth.callbackURL
 	},
-	(token, tokenSecret, profile, done) => {
+	(accessToken, refreshToken, params, profile, done) => {
 		process.nextTick(() => {
-			User.findOne({ 'twitter.id': profile.id }, (err, user) => {
+			User.findOne({ 'vkontakte.id': profile.id }, (err, user) => {
 				if (err) return done(err);
 
 				if (user) return done(null, user);
 				else {
 					const newUser = new User();
 
-					newUser.twitter.id = profile.id;
-					newUser.twitter.username = profile.username;
-					newUser.twitter.displayName = profile.displayName;
+					newUser.vkontakte.id = profile.id;
+					newUser.vkontakte.username = profile.username;
+					newUser.vkontakte.displayName = profile.displayName;
 
 					newUser.save(err => {
 						if (err) throw err;
