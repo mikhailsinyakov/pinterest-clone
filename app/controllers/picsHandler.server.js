@@ -16,9 +16,9 @@ function PicsHandler() {
                 .then(picture => {
                     if (picture) return res.sendStatus(403);
                     const user_id = req.user.vkontakte.id;
-                    const username = req.user.vkontakte.username;
+                    const user_displayName = req.user.vkontakte.displayName;
                     const description = req.body.description;
-                    const newPic = new Pics({user_id, username, url, description, likes: []});
+                    const newPic = new Pics({user_id, user_displayName, url, description, likes: []});
                     newPic.save()
                             .then(() => res.sendStatus(200))
                             .catch(err => res.status(500).send(err));
@@ -28,7 +28,7 @@ function PicsHandler() {
     };
     
     this.deletePicture = (req, res) => {
-        Pics.findByIdAndRemove(req.query.id)
+        Pics.findById(req.query.id)
                 .then(() => res.sendStatus(200))
                 .catch(err => res.status(500).send(err));
     };

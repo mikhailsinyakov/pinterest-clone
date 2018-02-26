@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const Pic = new Schema({
 	user_id: Number,
-	username: String,
+	user_displayName: String,
 	url: String,
 	description: String,
 	likes: [{

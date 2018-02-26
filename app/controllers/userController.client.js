@@ -1,23 +1,26 @@
 'use strict';
 
-(function () {
+import ajaxFunctions from '../common/ajax-functions';
 
-   const displayName = document.querySelector('#display-name');
-   const apiUrl = appUrl + '/api/users/getUserData';
+const apiUrl = '/api/users/getUserData';
 
-
-   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, data => {
-      
-      const userObject = JSON.parse(data);
-
-      if (userObject.displayName) {
-         displayName.innerHTML = userObject.displayName;
-      } else if (userObject.username) {
-         displayName.innerHTML = userObject.username;
-      } else {
-         displayName.innerHTML = "guest";
-      }
-      
-
-   }));
-})();
+export default function userController () {
+   return ajaxFunctions.ready()
+            .then(() => ajaxFunctions.ajaxRequest('GET', apiUrl))
+            .then(result => {
+               return new Promise((resolve, reject) => {
+                  if (result.status == 200) {
+                     let user = JSON.parse(result.data);
+                     if (user.id) {
+                        user = {
+                           id: user.id,
+                     		username: user.username,
+                     		displayName: user.displayName
+                        };
+                     }
+                     resolve(user);
+                  }
+                  else reject(result.data);
+               });
+            }).catch(err => Promise.reject(err));
+}
