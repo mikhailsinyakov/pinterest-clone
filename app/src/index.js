@@ -18,6 +18,7 @@ class App extends React.Component {
         this.state = {
             user: null,
             pics: [],
+            isShownOnlyUserPics: false,
             error: null
         };
         
@@ -28,6 +29,8 @@ class App extends React.Component {
         this.deletePicture = this.deletePicture.bind(this);
         this.handleError = this.handleError.bind(this);
         this.clearError = this.clearError.bind(this);
+        this.showAllPics = this.showAllPics.bind(this);
+        this.showOnlyUserPics = this.showOnlyUserPics.bind(this);
     }
     
     getUserInfo() {
@@ -68,23 +71,37 @@ class App extends React.Component {
         this.setState({error: null});
     }
     
+    showAllPics() {
+        if (this.state.isShownOnlyUserPics) {
+            this.setState({isShownOnlyUserPics: false});
+        }
+    }
+    
+    showOnlyUserPics(id) {
+        if (this.state.isShownOnlyUserPics.id != id) {
+            this.setState({isShownOnlyUserPics: id});
+        }
+    }
+    
     componentDidMount() {
         this.getUserInfo();
         this.updatePics();
     }
     
-    componentDidUpdate() {
-        
-    }
     
     render() {
         return (
             <div>
-                <Header user={this.state.user} addPicture={this.addPicture}/>
+                <Header user={this.state.user} addPicture={this.addPicture}
+                        isShownOnlyUserPics={this.state.isShownOnlyUserPics}
+                        showAllPics={this.showAllPics} 
+                        showOnlyUserPics={this.showOnlyUserPics}/>
                 <ErrorMessage error={this.state.error} clearError={this.clearError}/>
                 <Pics pics={this.state.pics} user={this.state.user} 
                         deletePicture={this.deletePicture} 
-                        likeOrUnlikePicture={this.likeOrUnlikePicture}/>
+                        likeOrUnlikePicture={this.likeOrUnlikePicture}
+                        isShownOnlyUserPics={this.state.isShownOnlyUserPics}
+                        showOnlyUserPics={this.showOnlyUserPics}/>
             </div>
         );
     }

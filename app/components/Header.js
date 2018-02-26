@@ -30,11 +30,21 @@ export default class Header extends React.Component {
                 </header>
             );
         }
+        const isShownAllPics = !this.props.isShownOnlyUserPics;
+        const isShownUserPics = this.props.isShownOnlyUserPics == this.props.user.id;
         return (
             <header>
                 <h5>Welcome, {this.props.user.displayName}!</h5>
                 <nav>
                     <ul>
+                        <li onClick={this.props.showAllPics}
+                            className={isShownAllPics ? "active" : null}>
+                            All
+                        </li>
+                        <li onClick={() => this.props.showOnlyUserPics(this.props.user.id)}
+                            className={isShownUserPics ? "active" : null}>
+                            My pics
+                        </li>
                         <li onClick={this.toggleForm}>Add a picture</li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
