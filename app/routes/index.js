@@ -6,13 +6,6 @@ const picsHandler = new PicsHandler();
 
 module.exports = (app, passport) => {
 
-	function isLoggedIn (req, res, next) {
-		if (req.isAuthenticated()) {
-			return next();
-		} else {
-			res.redirect('/');
-		}
-	}
 
 	app.route('/')
 		.get((req, res) => res.sendFile(path + '/public/index.html'));

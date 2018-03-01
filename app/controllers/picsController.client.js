@@ -27,7 +27,7 @@ function PicsController() {
                             });
                             resolve(pics);
                         }
-                        else reject(result.data);
+                        else reject(result.status);
                     });
                     
                 }).catch(err => Promise.reject(err));
@@ -42,7 +42,7 @@ function PicsController() {
                         if (result.status == 200) {
                             resolve(result.status);
                         }
-                        else reject(result.data);
+                        else reject(result.status);
                     });
                     
                 }).catch(err => Promise.reject(err));
@@ -57,7 +57,7 @@ function PicsController() {
                         if (result.status == 200) {
                             resolve(result.status);
                         }
-                        else reject(result.data);
+                        else reject(result.status);
                     });
                     
                 }).catch(err => Promise.reject(err));
@@ -72,7 +72,7 @@ function PicsController() {
                         if (result.status == 200) {
                             resolve(result.status);
                         }
-                        else reject(result.data);
+                        else reject(result.status);
                     });
                     
                 }).catch(err => Promise.reject(err));

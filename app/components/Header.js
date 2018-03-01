@@ -1,59 +1,48 @@
 "use strict";
 
 import React from 'react';
-import AddForm from './AddForm';
 
-export default class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isShownForm: false
-        };
-        this.toggleForm = this.toggleForm.bind(this);
-    }
-    
-    toggleForm() {
-        if (!this.state.isShownForm) this.setState({isShownForm: true});
-        else this.setState({isShownForm: false});
-    }
-    
-    render() {
-        if (!this.props.user) {
-            return (
-                <header>
-                    <h5>Welcome, guest!</h5>
-                    <nav>
-                        <ul>
-                            <li><a href="/auth/vkontakte">Login with VK</a></li>
-                        </ul>
-                    </nav>
-                </header>
-            );
-        }
-        const isShownAllPics = !this.props.isShownOnlyUserPics;
-        const isShownUserPics = this.props.isShownOnlyUserPics == this.props.user.id;
-        return (
-            <header>
-                <h5>Welcome, {this.props.user.displayName}!</h5>
-                <nav>
-                    <ul>
-                        <li onClick={this.props.showAllPics}
-                            className={isShownAllPics ? "active" : null}>
-                            All
+export default function Header (props) {
+    const user = props.user;
+    const isShownAllPics = !props.isShownOnlyUserPics;
+    const isShownUserPics = props.isShownOnlyUserPics == (user && user.id);
+        
+    const head = <h5 className="text-light">Welcome, {user ? user.displayName : "guest"}!</h5>;
+    const loggingRedirect = user ? "/logout" : "/auth/vkontakte";
+    const logging = (<li className="nav-item">
+                        <a className="nav-link" href={loggingRedirect}>
+                            {user ? "Logout"
+                                  : "Login via "}
+                            {!user && <i className='fab fa-vk'></i>}
+                        </a>
+                    </li>);
+    const loginList = (<ul id="loginList" className="nav">
+                        {logging}
+                      </ul>);
+                         
+    const linkList = (<ul id="linkList" className="nav nav-pills">
+                        <li className="nav-item"
+                            onClick={props.showAllPics}>
+                            <a className={isShownAllPics ? "nav-link active" : "nav-link"}
+                                href="#">All</a>
                         </li>
-                        <li onClick={() => this.props.showOnlyUserPics(this.props.user.id)}
-                            className={isShownUserPics ? "active" : null}>
-                            My pics
+                        <li className="nav-item" 
+                            onClick={() => props.showOnlyUserPics(user && user.id)}>
+                            <a className={isShownUserPics ? "nav-link active" : "nav-link"} 
+                                href="#">My pics</a>
                         </li>
-                        <li onClick={this.toggleForm}>Add a picture</li>
-                        <li><a href="/logout">Logout</a></li>
-                    </ul>
+                        <li className="nav-item" onClick={e => props.toggleForm(e.screenX - 75)}>
+                            <a className="nav-link" href="#">Add a picture</a>
+                        </li>
+                    </ul>);
+        
+        
+    return (<header className="text-center bg-dark">
+                {head}
+                <nav className="clearfix">
+                    {user && linkList}
+                    {loginList}
                 </nav>
-                <AddForm isShownForm={this.state.isShownForm} 
-                        toggleForm={this.toggleForm} 
-                        addPicture={this.props.addPicture}/>
-            </header>
-        );
-    }
+            </header>);
     
 }
