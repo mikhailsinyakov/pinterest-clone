@@ -1,5 +1,6 @@
 "use strict";
 import Masonry from 'masonry-layout';
+import imagesLoaded from 'imagesloaded';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -42,10 +43,12 @@ class App extends React.Component {
     
     initMasonry() {
         const grid = document.querySelector(".grid");
-        const masonry = new Masonry(grid, {
-            itemSelector: '.grid-item',
-            percentPosition: true,
-            columnWidth: 20
+        imagesLoaded(grid, () => {
+            new Masonry(grid, {
+                itemSelector: '.grid-item',
+                percentPosition: true,
+                columnWidth: 20
+            });
         });
     }
     
